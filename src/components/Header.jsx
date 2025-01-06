@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 import Logo from "../assets/logo.jpg";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems.length)
+
   return (
     <div>
       <nav className=" flex justify-between items-center pb-1 px-8">
@@ -156,7 +161,7 @@ const Header = () => {
                 </svg>
               </button>
               <span className="absolute -top-1 left-3 bg-[#757575] text-white text-xs font-light rounded-full w-[17px] h-[17px] flex items-center justify-center">
-                0
+                {cartItems.length}
               </span>
             </div>
           </Link>
