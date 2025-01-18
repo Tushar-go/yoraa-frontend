@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart,deleteFromCart, updateQuantity, onClose  } from "../store/slices/cartSlice";
-import { Link, useNavigate } from "react-router";
+import { deleteFromCart, updateQuantity, onClose  } from "../store/slices/cartSlice";
+import { useNavigate } from "react-router";
 import { openEditModal } from "../store/slices/sidebarSlice";
 
 const CartSidebar = () => {
