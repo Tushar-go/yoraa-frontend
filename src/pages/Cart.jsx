@@ -1,34 +1,41 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, deleteFromCart, removeFromCart } from "../store/slices/cartSlice";
+import { deleteFromCart, updateQuantity } from "../store/slices/cartSlice";
 import CartItem from "../components/CartItem";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
 
-  
-
   const handleIncrement = (item) => {
-    if (item.quantity < 5) {
-      dispatch(addToCart({
+    dispatch(updateQuantity({
+      id: item.id,
+      size: item.size,
+      quantity: item.quantity + 1
+    }));
+  };
+
+  const handleDecrement = (item) => {
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({
         id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        size: item.size
+        size: item.size,
+        quantity: item.quantity - 1
       }));
+    } else {
+      dispatch(deleteFromCart({ id: item.id, size: item.size }));
     }
   };
 
-  const handleDecrement = (id) => {
-    dispatch(removeFromCart(id));
+  const handleDelete = (item) => {
+    dispatch(deleteFromCart({ id: item.id, size: item.size }));
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteFromCart(id));
-  };
+  const subtotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
 
   return (
     <div className="max-h-full w-full">
@@ -75,7 +82,7 @@ const Cart = () => {
           <div className="flex flex-col gap-4 w-full px-10 py-8">
             <div className="flex justify-between">
               <h2 className="text-xl">Subtotal</h2>
-              <p>Rs. {totalAmount.toFixed(2)}</p>
+              <p>Rs. {subtotal.toFixed(2)}</p>
             </div>
             <div className="w-full flex justify-center">
               <button className="px-36 py-4 mt-6 text-xs rounded-3xl shadow-md text-white bg-black">

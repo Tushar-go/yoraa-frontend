@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router";
 import Logo from "../assets/logo.jpg";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
+
 
 const Header = () => {
 
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems.length)
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+
+  
 
   return (
     <div>
@@ -97,7 +100,7 @@ const Header = () => {
         <div className="flex gap-5">
           {/* "Profile Btn" */}
           <div>
-            <button className=" hover:text-[#909090]">
+            <button  className=" hover:text-[#909090]">
               <svg
                 width="17"
                 height="17"
@@ -139,7 +142,7 @@ const Header = () => {
                 </svg>
               </button>
               <span className="absolute -top-1 left-3 bg-[#757575] text-white text-xs font-light rounded-full w-[17px] h-[17px] flex items-center justify-center">
-                0
+                {wishlistItems.length}
               </span>
             </div>
           </Link>

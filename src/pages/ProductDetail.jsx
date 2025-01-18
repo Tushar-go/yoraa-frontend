@@ -4,7 +4,7 @@ import whatsapp from "../assets/WhatsAppImg.png";
 import { productlist } from "../ProductList";
 import Carousel from "../components/Carousel";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/slices/cartSlice";
+import { addToCart, onOpen } from "../store/slices/cartSlice";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -25,6 +25,7 @@ const ProductDetail = () => {
         size: activeSize,
       })
     );
+    dispatch(onOpen())
   };
 
   return (

@@ -7,18 +7,24 @@ import ProductList from "./pages/ProductList";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
+import CartSidebar from "./components/CartSidebar";
+import EditModal from "./components/EditModal"; // Add this import
+
 
 const App = () => {
+
   return (
     <Router>
-      <Header />
+      <Header  />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductList />} />
+        <Route path="/products" element={<ProductList  />} />
         <Route path="products/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
+      <CartSidebar  />
+      <EditModal />
       <Footer />
     </Router>
   );
